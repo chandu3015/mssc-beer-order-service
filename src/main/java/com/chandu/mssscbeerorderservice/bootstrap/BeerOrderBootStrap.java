@@ -12,9 +12,9 @@ import java.util.UUID;
 @Component
 public class BeerOrderBootStrap implements CommandLineRunner {
     public static final String TASTING_ROOM = "Tasting Room";
-    public static final String BEER_1_UPC = "0631234200036";
-    public static final String BEER_2_UPC = "0631234300019";
-    public static final String BEER_3_UPC = "0083783375213";
+    public static final Long BEER_1_UPC =  631234200036l;
+    public static final Long BEER_2_UPC = 631234300019l;
+    public static final Long BEER_3_UPC = 83783375213l;
 
     private final CustomerRepository customerRepository;
     @Override
@@ -24,10 +24,13 @@ public class BeerOrderBootStrap implements CommandLineRunner {
 
     private void loadCustomerData() {
         if (customerRepository.count() == 0) {
-            customerRepository.save(Customer.builder()
+            Customer customer = customerRepository.save(Customer.builder()
                     .customerName(TASTING_ROOM)
                     .apiKey(UUID.randomUUID())
                     .build());
+            System.out.println(" Customer Loaded "+customer);
         }
+
+
     }
 }

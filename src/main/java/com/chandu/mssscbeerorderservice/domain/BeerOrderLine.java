@@ -1,14 +1,12 @@
 package com.chandu.mssscbeerorderservice.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.sql.Timestamp;
 import java.util.UUID;
+
 
 
 @Getter
@@ -21,12 +19,14 @@ public class BeerOrderLine extends BaseEntity {
     @Builder
     public BeerOrderLine(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate,
                          BeerOrder beerOrder, UUID beerId, Integer orderQuantity,
-                         Integer quantityAllocated) {
+                         Integer quantityAllocated,
+                         Long upc) {
         super(id, version, createdDate, lastModifiedDate);
         this.beerOrder = beerOrder;
         this.beerId = beerId;
         this.orderQuantity = orderQuantity;
         this.quantityAllocated = quantityAllocated;
+        this.upc=upc;
     }
 
     @ManyToOne
@@ -35,4 +35,6 @@ public class BeerOrderLine extends BaseEntity {
     private UUID beerId;
     private Integer orderQuantity = 0;
     private Integer quantityAllocated = 0;
+
+    private Long upc;
 }
